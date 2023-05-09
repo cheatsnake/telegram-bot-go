@@ -16,7 +16,7 @@ func main() {
 	currentOffset := 1
 
 	// Check is bot token valid
-	botInfo, err := bot.GetMe(); 
+	botInfo, err := bot.GetMe()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -26,16 +26,16 @@ func main() {
 	// Running periodic pollings
 	for {
 		updates, err := bot.Updates(currentOffset, defaultMsgLimit)
-		if (err != nil) {
+		if err != nil {
 			fmt.Println(err.Error())
 		}
 
 		// Need to get only fresh updates
 		if len(updates) > 0 {
-			currentOffset = updates[len(updates) - 1].ID + 1
+			currentOffset = updates[len(updates)-1].ID + 1
 		}
 
-		// Process each message we receive 
+		// Process each message we receive
 		for i := range updates {
 			// Just send the user his own message
 			go bot.SendMessage(updates[i].Message.Chat.ID, updates[i].Message.Text)
@@ -47,6 +47,11 @@ func main() {
 }
 
 func mustToken() string {
+	token := os.Getenv("BOT_TOKEN")
+	if len(token) > 0 {
+		return token
+	}
+
 	if len(os.Args) < 2 {
 		log.Fatal("telegram bot API token is required")
 	}
