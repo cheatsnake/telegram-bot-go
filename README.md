@@ -1,6 +1,6 @@
 # Telegram Bot Go
 
-A minimal implementation of a telegram bot for receiving and sending messages in pure Go. Use this as a template for your cool bots.
+A minimal implementation of a telegram bot for receiving and sending messages in pure Go. Use this as an initial template for your cool bots.
 
 ## Usage
 
@@ -23,7 +23,25 @@ make build
 3. Run it
 
 ```sh
-./main 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+./main "paste_your_token_here"
 ```
 
-> Pass your bot's API token
+## 🐳 Docker container startup
+
+1. Start building proccess:
+
+```sh
+make docker-build
+```
+
+2. Running a container with the specified token:
+
+```sh
+make docker-start BOT_TOKEN="paste_your_token_here"
+```
+
+To stop the container and delete it use:
+
+```sh
+make docker-stop
+```
